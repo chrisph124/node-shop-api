@@ -9,26 +9,33 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  const { id } = req.params;
   res.status(200).json({
-    message: '/GET products by ID',
+    message: `/GET products by ID: ${id}`,
   });
 });
 
 router.post('/', (req, res) => {
-  res.status(201).json({
-    message: '/POST products',
+  const product = {
+    name: req.body.name,
+    price: req.body.price,
+  };
+  res.status(200).json({
+    createdProduct: { product },
   });
 });
 
 router.patch('/:id', (req, res) => {
+  const { id } = req.params;
   res.status(200).json({
-    message: '/PATCH update products by ID',
+    message: `/PATCH update products by ID: ${id}`,
   });
 });
 
 router.delete('/:id', (req, res) => {
+  const { id } = req.params;
   res.status(200).json({
-    message: '/DELETE delete products by ID',
+    message: `/DELETE delete products by ID: ${id}`,
   });
 });
 

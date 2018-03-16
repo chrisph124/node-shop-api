@@ -9,20 +9,25 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  const { id } = req.params;
   res.status(200).json({
-    message: '/GET orders by ID',
+    id,
+    message: `/GET orders by ID: ${id}`,
   });
 });
 
 router.post('/', (req, res) => {
-  res.status(201).json({
-    message: '/POST orders',
-  });
+  const order = {
+    productId: req.body.productId,
+    quantity: req.body.quantity,
+  };
+  res.status(201).json(order);
 });
 
 router.delete('/:id', (req, res) => {
+  const { id } = req.params;
   res.status(200).json({
-    message: '/DELETE delete order by ID',
+    message: `/DELETE delete order by ID: ${id}`,
   });
 });
 
