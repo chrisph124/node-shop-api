@@ -4,7 +4,8 @@
   "description": "A simple RESTful API using Express.js and MongoDB",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
