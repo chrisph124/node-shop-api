@@ -15,6 +15,7 @@ app.use(cors());
 
 // Connect database
 mongoose.connect(`mongodb://admin:${process.env.MONGO_ATLAS_PW}@crud-simple-shard-00-00-lh51y.mongodb.net:27017,crud-simple-shard-00-01-lh51y.mongodb.net:27017,crud-simple-shard-00-02-lh51y.mongodb.net:27017/test?ssl=true&replicaSet=crud-simple-shard-0&authSource=admin`);
+mongoose.Promise = global.Promise;
 
 const products = require('./api/routes/products/index');
 const orders = require('./api/routes/orders/index');
