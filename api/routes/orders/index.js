@@ -1,6 +1,9 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const router = express.Router();
+const Order = require('../../model/order');
+const Product = require('../../model/product');
 
 router.get('/', (req, res) => {
   res.status(200).json({
@@ -17,11 +20,27 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const order = {
-    productId: req.body.productId,
-    quantity: req.body.quantity,
-  };
-  res.status(201).json(order);
+  const { productId, quantity } = req.body;
+  const order = new Order({
+    _id: new mongoose.Types.ObjectId(),
+    productId,
+    quantity,
+    // name: [{ type: mongoose.Schema.Types.String, ref: 'Product' }],
+    // price: [{ type: mongoose.Schema.Types.Number, ref: 'Product' }],
+  });
+
+  order.save()
+    .then((result) => {
+      res.status(201).json({
+        _id: result.id,
+        Order: {
+          // name: result.name,
+          // price: result.price,
+          quantity: result.quantity,
+        },
+      });
+    })
+    .catch(err => res.status(500).json({ error: err }));
 });
 
 router.delete('/:id', (req, res) => {
